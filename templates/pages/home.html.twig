@@ -1,0 +1,48 @@
+{% extends 'blog-base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block page_bg %}../img/{{ page.type }}-bg.jpg{% endblock %}
+
+{% block page_heading %}
+    <h1>{{ page.title }}</h1>
+    <span class="subheading">{{ page.description }}</span>
+{% endblock %}
+
+
+{% block body %}
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {% for post in postsList %}
+                    <div class="post-preview">
+                        <a href="{{ path('posts_read', {'id': post.id}) }}">
+                            <h2 class="post-title">
+                                {{ post.title }}
+                            </h2>
+                        </a>
+                        <p class="post-meta">Posted on
+                            {{ post.dateCreated ? post.dateCreated|date('d/m/y') : '' }} in {{ post.category.name }}</p>
+                    </div>
+                    <hr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                <!-- Pager -->
+                <div class="clearfix">
+                    {% if posts_page > 1 %}
+                    <a class="btn btn-primary float-left" href="{{ path('home_posts', {'posts_page': posts_page-1}) }}">← Recent Posts</a>
+                    {% endif %}
+                    {% if posts_page < nbPages %}
+                    <a class="btn btn-primary float-right" href="{{ path('home_posts', {'posts_page': posts_page+1}) }}">Older Posts &rarr;</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+{% endblock %}

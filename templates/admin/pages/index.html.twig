@@ -1,0 +1,33 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Pages index{% endblock %}
+
+{% block page_header %}
+    <h1>Pages</h1>
+{% endblock %}
+
+{% block body %}
+    <div class="col">
+        <div class="row">
+            {% for page in pages %}
+                <div class="col-md-3">
+                    <div class="box box-primary text-center">
+                        <div class="box-body">
+                            <div class="icon">
+                                {% if page.type == 'home' %}
+                                    <i class="glyphicon glyphicon-home fa-4x"></i>
+                                {% elseif page.type == 'about' %}
+                                    <i class="glyphicon glyphicon-info-sign fa-4x"></i>
+                                {% else %}
+                                    <i class="glyphicon glyphicon-send fa-4x"></i>
+                                {% endif %}
+                            </div>
+                            <a href="{{ path('pages_edit', {'type': page.type}) }}"><h1>{{ page.type }}</h1></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Posts index{% endblock %}
+
+{% block page_header %}
+    <h1>Posts</h1>
+{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i>{{ message }}</h4>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('deleted') %}
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-info"></i>{{ message }}</h4>
+        </div>
+    {% endfor %}
+
+    <div class="col">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Liste des posts</h3>
+                <div class="box-tools">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        {% for p in range(1, nbPages) %}
+                            <li{% if p == page %} class="active"{% endif %}>
+                                <a href="{{ path('posts_index', {'page': p}) }}">{{ p }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Date Created</th>
+                        <th>actions</th>
+                    </tr>
+                    {% for post in postsList %}
+                        <tr>
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.category.name }}</td>
+                            <td>{{ post.dateCreated ? post.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('posts_show', {'id': post.id}) }}" class="btn btn-info">show</a>
+                                <a href="{{ path('posts_edit', {'id': post.id}) }}" class="btn btn-warning">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a href="{{ path('posts_new') }}" class="btn btn-success">Create new</a>
+    </div>
+
+{% endblock %}

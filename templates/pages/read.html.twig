@@ -1,0 +1,22 @@
+{% extends 'blog-base.html.twig' %}
+
+{% block page_bg %}../img/post-bg.jpg{% endblock %}
+{% block title %}Post{% endblock %}
+
+{% block page_heading %}
+    <h1>{{ post.title }}</h1>
+{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>{{ post.content }}</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+{% endblock %}

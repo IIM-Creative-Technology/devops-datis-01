@@ -1,0 +1,28 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Message{% endblock %}
+
+{% block post_heading %}
+    <h1>{{ message.subject }}</h1>
+{% endblock %}
+
+{% block body %}
+
+    <div class="box box-primary">
+        <div class="box-header with-border">Read message</div>
+        <div class="box-body no-padding">
+            <div class="mailbox-read-info">
+                <h3>{{ message.subject }}</h3>
+                <h5>
+                    <span class="mailbox-read-time">{{ message.dateSent ? message.dateSent|date('Y-m-d H:i:s') : '' }}</span>
+                </h5>
+            </div>
+            <div class="mailbox-read-message">
+                <p>{{ message.message }}</p>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a href="{{ path('messages') }}" class="btn btn-default">back to list</a>
+        </div>
+    </div>
+{% endblock %}

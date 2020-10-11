@@ -1,0 +1,31 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block post_heading %}
+    <h1>{{ post.title }}</h1>
+{% endblock %}
+
+{% block body %}
+
+<div class="box box-primary">
+    <div class="box-header with-border">Read post</div>
+    <div class="box-body no-padding">
+        <div class="mailbox-read-info">
+            <h3>{{ post.title }}</h3>
+            <h5>
+                <span class="mailbox-read-time">{{ post.dateCreated ? post.dateCreated|date('Y-m-d H:i:s') : '' }}</span>
+            </h5>
+        </div>
+        <div class="mailbox-read-message">
+            <p>{{ post.content }}</p>
+        </div>
+    </div>
+    <div class="box-footer">
+        <a href="{{ path('posts_edit', {'id': post.id}) }}" class="btn btn-warning">edit</a>
+
+        <a href="{{ path('posts_index', {'page': 1}) }}" class="btn btn-default">back to list</a>
+    </div>
+    {{ include('admin/posts/_delete_form.html.twig') }}
+</div>
+{% endblock %}
