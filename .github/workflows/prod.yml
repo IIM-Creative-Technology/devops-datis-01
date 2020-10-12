@@ -3,15 +3,17 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      - prod
+      - preprod
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: symfonycorp/security-checker-action@v2
+      - uses: michaelw90/PHP-Lint@master
       - uses: akhileshns/heroku-deploy@v3.5.7
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_app_name: ${{ secrets.HEROKU_PREPROD_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
