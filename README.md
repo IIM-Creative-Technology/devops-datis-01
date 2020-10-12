@@ -9,16 +9,16 @@ Application Symfony 4 déployée sur Heroku
 
 Le workflow comporte 4 steps :
 
-* actions/checkout@v2
+* actions/checkout@v2 <br />
 *permet au workflow d'accéder à notre repo GitHub*
 
-* symfonycorp/security-checker-action@v2
+* symfonycorp/security-checker-action@v2 <br />
 *vérifie si le composer.lock ne contient pas de vulnérabilités connues dans ses dépendences (check de sécurité)*
 
-* michaelw90/PHP-Lint@master
+* michaelw90/PHP-Lint@master <br />
 *linter PHP*
 
-* akhileshns/heroku-deploy@v3.5.7
+* akhileshns/heroku-deploy@v3.5.7 <br />
 *déploie automatiquement notre app sur Heroku*
 
 Ces steps se déclenchent automatiquement à l'action spécifiée dans le workflow (on: push: ..)
